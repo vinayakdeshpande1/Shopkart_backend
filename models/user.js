@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const CartSchema = require("./cart")
 
 const cart = new mongoose.Schema({
     productId: String,
