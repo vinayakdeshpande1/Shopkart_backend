@@ -24,11 +24,11 @@ router.post("/", async (req, res) => {
     if (await bcrypt.compare(password, account.password)) {
 
         const token = jwt.sign({
-            id: user._id,
-            fullname: user.fullname,
+            id: account._id,
+            fullname: account.fullname,
         }, JWTSECRET)
 
-        // console.log(token)
+        console.log(token)
 
         return res.json({
             status: "Ok",
