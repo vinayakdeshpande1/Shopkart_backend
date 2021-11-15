@@ -1,4 +1,10 @@
 const mongoose = require("mongoose")
+const CartSchema = require("./cart")
+
+const cart = new mongoose.Schema({
+    productId: String,
+    quantity: Number,
+})
 
 const UserSchema = new mongoose.Schema({
     fullname: {
@@ -22,7 +28,8 @@ const UserSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now()
-    }
+    },
+    cart: [cart],
 }, { collection: "users" })
 
 module.exports = mongoose.model("UserSchema", UserSchema)
