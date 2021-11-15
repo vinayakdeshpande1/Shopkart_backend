@@ -5,7 +5,7 @@ const User = require("../models/user")
 const router = express.Router()
 
 router.post("/", async (req, res) => {
-    const { fullname, email, phone, password } = req.body
+    const { fullname, email, phone, password, cart } = req.body
     passwordEncrypted = await bcrypt.hash(password, 10)
     //console.log(passwordEncrypted);
     try {
@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
             email,
             phone,
             password: passwordEncrypted,
+            cart,
         })
 
         res.json({ status: "ok", code: "200" })
