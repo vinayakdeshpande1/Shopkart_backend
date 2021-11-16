@@ -15,6 +15,7 @@ const DBURL = process.env.DBURL
 const loginRoute = require("./api/login")
 const registerRoute = require("./api/register")
 const cartRoute = require("./api/cart")
+const productRoute = require("./api/product")
 
 // Connect to DB
 mongoose.connect(DBURL, () => {
@@ -27,6 +28,7 @@ app.use(bodyParser.json())
 app.use("/login", loginRoute)
 app.use("/register", registerRoute)
 app.use("/cart", cartRoute)
+app.use("/products", productRoute)
 
 
 // Starting the server
