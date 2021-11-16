@@ -9,39 +9,46 @@ const JWTSECRET = process.env.JWTSECRET
 
 const router = express.Router()
 
-router.post("/", async (req, res) => { 
-    const { email, password } = req.body
-    const account = await user.findOne({ email }).lean()
+router.post("/", async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const account = await user.findOne({ email }).lean()
 
-    if (!account) {
+        if (!account) {
+            return res.json({
+                status: "Error",
+                msg: "User does not exist",
+                code: "404"
+            })
+        }
+
+        if (await bcrypt.compare(password, account.password)) {
+
+            const token = jwt.sign({
+                id: account._id,
+                fullname: account.fullname,
+            }, JWTSECRET)
+
+            console.log(token)
+
+            return res.json({
+                status: "Ok",
+                msg: "User validated",
+                code: "200",
+                token,
+                fullname: account.fullname,
+            })
+        } else {
+            return res.json({
+                status: "Error",
+                msg: "Wrong Password",
+                code: "201"
+            })
+        }
+    } catch (error) {
         return res.json({
-            status: "Error",
-            msg: "User does not exist",
-            code: "404"
-        })
-    }
-
-    if (await bcrypt.compare(password, account.password)) {
-
-        const token = jwt.sign({
-            id: account._id,
-            fullname: account.fullname,
-        }, JWTSECRET)
-
-        console.log(token)
-
-        return res.json({
-            status: "Ok",
-            msg: "User validated",
-            code: "200",
-            token,
-            fullname: account.fullname,
-        })
-    } else {
-        return res.json({
-            status: "Error",
-            msg: "Wrong Password",
-            code: "201"
+            status: "error",
+            error,
         })
     }
 })
