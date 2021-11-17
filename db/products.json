@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "6193daf153999c9666018991"
+  },
+  "name": "laptop 1",
+  "category": "electronics",
+  "price": 20000,
+  "originalPrice": 25000,
+  "quantityAvailable": 30,
+  "quantitySold": 24
+},{
+  "_id": {
+    "$oid": "6193dbb5c847b94b38451d3f"
+  },
+  "name": "laptop 2",
+  "category": "electronics",
+  "price": 24999,
+  "originalPrice": 32000,
+  "quantityAvailable": 10,
+  "quantitySold": 94
+},{
+  "_id": {
+    "$oid": "6193dbddc847b94b38451d40"
+  },
+  "name": "Mobile",
+  "category": "electronics",
+  "price": 14999,
+  "originalPrice": 17000,
+  "quantityAvailable": 2,
+  "quantitySold": 30
+}]
