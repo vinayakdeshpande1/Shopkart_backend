@@ -15,14 +15,17 @@ router.post("/", async (req, res) => {
         const { token } = req.body
 
         const user = jwt.verify(token, JWTSECRET)
+        // console.log(user)
         userModel.find({ _id: user.id }).lean().exec((err, data) => {
+            console.log(data[0].cart)
             return res.json({
                 status: "success",
                 cart: data[0].cart
             })
         })
     } catch (err) {
-        res.json({
+        // console.log(err)
+        return res.json({
             status: "error",
             error: err
         })
