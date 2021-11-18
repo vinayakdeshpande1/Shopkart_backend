@@ -16,6 +16,7 @@ const loginRoute = require("./api/login")
 const registerRoute = require("./api/register")
 const cartRoute = require("./api/cart")
 const productRoute = require("./api/product")
+const searchRoute = require("./api/search")
 
 // Connect to DB
 mongoose.connect(DBURL, () => {
@@ -29,6 +30,7 @@ app.use("/login", loginRoute)
 app.use("/register", registerRoute)
 app.use("/cart", cartRoute)
 app.use("/products", productRoute)
+app.use("/search", searchRoute)
 
 
 // Starting the server
