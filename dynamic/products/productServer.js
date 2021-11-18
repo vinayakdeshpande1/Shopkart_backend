@@ -9,7 +9,7 @@ const app = express()
 
 // GLOBAL
 const PORT = process.env.PORT || 3330
-const DBURL = "mongodb://localhost:27017/shopkart-db"
+const DBURL = "mongodb+srv://shopkartadmin:admin-shopkart@cluster0.akvtj.mongodb.net/shopkart-db?retryWrites=true&w=majority"
 
 
 // Connect to DB
