@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopKart | Add Products</title>
+
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            justify-content: center;
+            margin: auto;
+            margin-top: 5rem;
+        }
+
+        form>div {
+            width: 500px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        form>div>label+input {
+            height: 1.4rem;
+        }
+
+        form>input {
+            width: 300px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; ">Add Product</h1>
+    <form name="productRegistrationForm" action="/" method="post" style="text-align: center;">
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div>
+            <label for="category">Category: </label>
+            <input type="text" name="category" id="category">
+        </div>
+        <div>
+            <label for="img">Product Image: </label>
+            <input type="text" name="img" id="img">
+        </div>
+        <div>
+            <label for="desc">Description: </label>
+            <input type="text" name="description" id="desc"
+                value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, praesentium commodi! Iure, accusamus eos. Assumenda quam, totam deleniti odio magni, nobis incidunt perferendis quos quod inventore expedita sapiente culpa temporibus voluptatibus. Voluptatum dolore, repellendus vitae eaque tenetur nam quas veritatis totam nemo, et adipisci repudiandae sequi omnis ea excepturi numquam!">
+        </div>
+        <div>
+            <label for="price">Price: </label>
+            <input type="number" name="price" id="price">
+        </div>
+        <div>
+            <label for="original-price">Original Price: </label>
+            <input type="number" name="originalPrice" id="original-price">
+        </div>
+        <div>
+            <label for="quantityAvailable">Quantity Available: </label>
+            <input type="number" name="quantityAvailable" id="quantityAvailable">
+        </div>
+        <div>
+            <label for="quantitySold">Quantity Sold: </label>
+            <input type="number" name="quantitySold " id="quantitySold" value="0">
+        </div>
+        <input style="width: 500px !important; margin-top: 1rem; padding: 0.3rem 0.6rem;" type="submit"
+            value="Add Product" aria-label="submit">
+    </form>
+
+    <script>
+        const form = document.forms.productRegistrationForm
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+            const name = form.elements.name.value
+            const category = form.elements.category.value
+            const description = form.elements.description.value
+            const img = form.elements.img.value
+            const price = form.elements.price.value
+            const originalPrice = form.elements.originalPrice.value
+            const quantityAvailable = form.elements.quantityAvailable.value
+            const quantitySold = form.elements.quantitySold.value
+
+            fetch("http://localhost:3330/", {
+                    method: "post",
+                    headers: {
+                        "content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name,
+                        category,
+                        description,
+                        price, 
+                        originalPrice,
+                        quantityAvailable,
+                        quantitySold
+                    })
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data)
+                    })
+        })
+    </script>
+</body>
+
+</html>
