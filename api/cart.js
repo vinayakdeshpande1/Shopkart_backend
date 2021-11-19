@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
             product = []
             data[0].cart.map((item) => {
                 // console.log(item)
-                productModel.find({ _id: item.productID }).lean().exec((err, productInfo) => {
+                productModel.find({ _id: item.productId }).lean().exec((err, productInfo) => {
                     // console.log(productInfo)
                 })
             })
@@ -203,6 +203,31 @@ router.post("/increase/:increaseBy/:productID", async (req, res) => {
                 msg: "Product does not exist in Cart",
             })
         }
+    })
+})
+
+router.post("/place-order", async (req, res) => {
+    const { token } = req.body
+
+    if (!token) {
+        return res.json({
+            status: "error",
+            error: "Token not provided"
+        })
+    }
+
+    let user = {}
+    try {
+        user = jwt.verify(token, JWTSECRET)
+    } catch (err) {
+        return res.json({
+            status: "error",
+            error: err
+        })
+    }
+
+    userModel.find({_id: user.id}).lean().exec((err, data) => {
+        console.log("CART", data[0].cart)
     })
 })
 
