@@ -6,10 +6,10 @@
 3. DO YOUR WORK
 
 #### TODO
-- search api
-- add to cart
-- increase/descrease cart item count
-- remove product from cart
+- DONE search api
+- DONE add to cart
+- DONE increase/descrease cart item count
+- DONE remove product from cart
 - place order from cart
 - users collection: cart->cart price, purchased items (orders)
 - product collection: image, desccription, 
