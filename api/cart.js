@@ -238,7 +238,8 @@ router.post("/place-order", async (req, res) => {
     userModel.find({ _id: user.id }).lean().exec((err, data) => {
         try {
             let temp = []
-            userModel.updateOne({ _id: user.id }, { $set: { orders: data[0].cart }, $set: { cart: temp } }).lean().exec((err, result) => {
+            console.log(data)
+            userModel.updateOne({ _id: user.id }, { $set: { cart: temp }, $push: {orders: data[0].cart} }).lean().exec((err, result) => {
                 // console.log(result)
                 res.json({
                     result
