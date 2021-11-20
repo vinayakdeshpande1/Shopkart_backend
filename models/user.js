@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema({
         default: Date.now()
     },
     cart: [cart],
+    orders: [cart]
 }, { collection: "users" })
 
 module.exports = mongoose.model("UserSchema", UserSchema)
