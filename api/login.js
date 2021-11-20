@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
                 fullname: account.fullname,
             }, JWTSECRET)
 
-            console.log(token)
+            // console.log(token)
 
             return res.json({
                 status: "Ok",

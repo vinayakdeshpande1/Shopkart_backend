@@ -37,10 +37,10 @@ router.post("/", async (req, res) => {
                     return res.json({
                         status: "success",
                         result: {
-                            
                             fullname: result[0].fullname,
                             email: result[0].email,
                             phone: result[0].phone,
+                            gender: result[0].gender,
                         }
                     })
                 }
@@ -86,8 +86,6 @@ router.post("/update", async (req, res) => {
                         result: []
                     })
                 } else {
-
-                    console.log(result)
                     return res.json({
                         status: "success",
                         result,

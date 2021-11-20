@@ -21,7 +21,7 @@ router.get("/:term", async (req, res) => {
             })
         })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.json({
             status: "error",
             error

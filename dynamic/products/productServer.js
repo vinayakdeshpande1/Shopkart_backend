@@ -28,19 +28,19 @@ app.get("/", async (req, res) => {
 
 app.post("/", (req, res) => {
     const { name, description, img,  category, price, originalPrice, quantityAvailable, quantitySold } = req.body
-    console.log({ name, description, img,  category, price, originalPrice, quantityAvailable, quantitySold })
+    // console.log({ name, description, img,  category, price, originalPrice, quantityAvailable, quantitySold })
     try {
         productModel.insertMany({ name, category, img, price, originalPrice, quantityAvailable, quantitySold })
             // .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 return res.json({
                     status: "success",
                     data
                 })
             })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.json({
             status: "error",
             error

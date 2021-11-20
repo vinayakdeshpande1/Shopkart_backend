@@ -19,7 +19,7 @@ router.get("/all", async (req, res) => {
             })
         }
 
-        console.log("All products fetched by: ", req.headers.host)
+        // console.log("All products fetched by: ", req.headers.host)
         return res.json({
             data,
             length: data.length,
@@ -36,7 +36,7 @@ router.get("/category/:category", async (req, res) => {
             })
         }
 
-        console.log(`Category: "${req.params.category}" fetched by ${req.headers.host}`)
+        // console.log(`Category: "${req.params.category}" fetched by ${req.headers.host}`)
         return res.json({
             data,
             length: data.length,
@@ -53,7 +53,7 @@ router.get("/:productID", async (req, res) => {
             })
         }
 
-        console.log(`ProductID: "${req.params.productID}" fetched by ${req.headers.host}`)
+        // console.log(`ProductID: "${req.params.productID}" fetched by ${req.headers.host}`)
         return res.json({
             data: data[0],
             length: data.length,

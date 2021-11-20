@@ -181,14 +181,14 @@ router.post("/increase/:increaseBy/:productID", async (req, res) => {
     userModel.find({ _id: user.id }).lean().exec((err, data) => {
 
         itemExists = false
-        console.log(data[0].cart)
+        // console.log(data[0].cart)
         for (let item of data[0].cart) {
             if (item.productId === req.params.productID) {
                 itemExists = true
-                console.log("found")
+                // console.log("found")
                 break
             }
-            console.log("aloy itha")
+            // console.log("aloy itha")
         }
 
         if (itemExists) {
@@ -200,7 +200,7 @@ router.post("/increase/:increaseBy/:productID", async (req, res) => {
                     })
                 }
 
-                console.log("set")
+                // console.log("set")
                 return res.json({
                     status: "success",
                     data,
@@ -239,7 +239,7 @@ router.post("/place-order", async (req, res) => {
         try {
             let temp = []
             userModel.updateOne({ _id: user.id }, { $set: { orders: data[0].cart }, $set: { cart: temp } }).lean().exec((err, result) => {
-                console.log(result)
+                // console.log(result)
                 res.json({
                     result
                 })
