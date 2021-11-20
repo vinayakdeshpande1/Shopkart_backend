@@ -19,26 +19,35 @@ router.post("/", async (req, res) => {
         // console.log(user)
         userModel.find({ _id: user.id }).lean().exec((err, data) => {
 
-            product = []
-            data[0].cart.map((item) => {
-                // console.log(item)
-                productModel.find({ _id: item.productId }).lean().exec((err, productInfo) => {
-                    // console.log(productInfo)
+            try {
+                product = []
+                data[0].cart.map((item) => {
+                    // console.log(item)
+                    productModel.find({ _id: item.productId }).lean().exec((err, productInfo) => {
+                        // console.log(productInfo)
+                    })
                 })
-            })
 
-            // console.log(product)
+                // console.log(product)
 
-            return res.json({
-                status: "success",
-                cart: data[0].cart
-            })
+                return res.json({
+                    status: "success",
+                    cart: data[0].cart
+                })
+            } catch (err) {
+                return res.json({
+                    status: "error",
+                    error: err,
+                    cart: []
+                })
+            }
         })
     } catch (err) {
         // console.log(err)
         return res.json({
             status: "error",
-            error: err
+            error: err,
+            cart: []
         })
     }
 })
@@ -127,7 +136,7 @@ router.post("/remove/:productID", async (req, res) => {
         }
 
         if (itemExists) {
-            userModel.updateOne({ _id: user.id }, { $pull: { "cart": { "productId": req.params.productID} } }).lean().exec((err, data) => {
+            userModel.updateOne({ _id: user.id }, { $pull: { "cart": { "productId": req.params.productID } } }).lean().exec((err, data) => {
                 if (err) {
                     return res.json({
                         status: "error",
@@ -183,7 +192,7 @@ router.post("/increase/:increaseBy/:productID", async (req, res) => {
         }
 
         if (itemExists) {
-            userModel.updateOne({ _id: user.id, "cart.productId": req.params.productID }, { $inc: { "cart.$.quantity": req.params.increaseBy}}).lean().exec((err, data) => {
+            userModel.updateOne({ _id: user.id, "cart.productId": req.params.productID }, { $inc: { "cart.$.quantity": req.params.increaseBy } }).lean().exec((err, data) => {
                 if (err) {
                     return res.json({
                         status: "error",
@@ -226,9 +235,49 @@ router.post("/place-order", async (req, res) => {
         })
     }
 
-    userModel.find({_id: user.id}).lean().exec((err, data) => {
-        console.log("CART", data[0].cart)
+    userModel.find({ _id: user.id }).lean().exec((err, data) => {
+        try {
+            let temp = []
+            userModel.updateOne({ _id: user.id }, { $set: { orders: data[0].cart }, $set: { cart: temp } }).lean().exec((err, result) => {
+                console.log(result)
+                res.json({
+                    result
+                })
+            })
+        } catch (error) {
+            res.json({
+                error
+            })
+        }
     })
+})
+
+router.post("/my-orders", async (req, res) => {
+    try {
+        const { token } = req.body
+
+        const user = jwt.verify(token, JWTSECRET)
+        // console.log(user)
+        userModel.find({ _id: user.id }).lean().exec((err, data) => {
+
+            product = []
+            data[0].cart.map((item) => {
+                productModel.find({ _id: item.productId }).lean().exec((err, productInfo) => {
+                })
+            })
+
+            return res.json({
+                status: "success",
+                cart: data[0].orders
+            })
+        })
+    } catch (err) {
+        // console.log(err)
+        return res.json({
+            status: "error",
+            error: err
+        })
+    }
 })
 
 
