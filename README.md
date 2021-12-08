@@ -1,5 +1,7 @@
 # shopkart-backend
 
+#### Live Demo: [https://shoppkartt.netlify.app](https://shoppkartt.netlify.app)
+
 #### STEPS
 1. Start server using `node start` or `node server.js`
 2. Start Angular server from angular project using `ng s` or `ng serve`
